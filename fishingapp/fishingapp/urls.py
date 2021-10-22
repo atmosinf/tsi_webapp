@@ -18,6 +18,7 @@ from django.urls import path, re_path, include
 from homepage import views
 
 urlpatterns = [
+    re_path(r'^', include('homepage.urls')),
     re_path(r'^$', views.index, name='index'),
     path('admin/', admin.site.urls),
 ]
