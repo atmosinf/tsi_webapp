@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = (BASE_DIR) / 'templates'
 STATIC_DIR = (BASE_DIR) / 'static'
+MEDIA_DIR = (BASE_DIR) / 'media'
 
 
 # Quick-start development settings - unsuitable for production
@@ -125,6 +126,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = MEDIA_DIR
+
+LOGIN_URL = '/homepage/user_login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
