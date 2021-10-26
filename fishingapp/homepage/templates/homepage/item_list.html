@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_block %}
+
+
+    <div class="row">
+
+    {% for item in item_list %}
+      <div class="col"><a href="{{item.id}}"><img class="imgrid" src="{{item.image.url}}" alt=""></a></div>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

@@ -5,14 +5,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from homepage import models
+from django.views.generic import View, TemplateView, ListView, DetailView
+
+class IndexView(ListView):
+    context_object_name = 'item_list'
+    model = models.Item
 
 # Create your views here.
-
-def index(request):
-    return render(request, 'homepage/index.html')
-
-def item(request):
-    return render(request, 'homepage/item.html')
+class ItemDetailView(DetailView):
+    context_object_name = 'item_detail'
+    model = models.Item
+    template_name = 'homepage/item.html'
 
 def register(request):
     registered = False

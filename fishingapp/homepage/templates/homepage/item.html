@@ -1,0 +1,7 @@
+{% extends "homepage/homepage_base.html" %}
+{% block body_block %}
+  <h1>{{item_detail.name}}</h1>
+  <img src="{{item_detail.image.url}}" alt="">
+  <p>{{item_detail.description}}</p>
+  <p>€{{item_detail.price}}</p>
+{% endblock %}

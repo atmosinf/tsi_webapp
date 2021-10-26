@@ -7,3 +7,12 @@ class UserProfileInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Item(models.Model):
+    name = models.CharField(max_length=256)
+    description = models.CharField(max_length=2000)
+    price = models.DecimalField(decimal_places=2,max_digits=10)
+    image = models.ImageField(upload_to='products/')
+
+    def __str__(self):
+        return self.name
