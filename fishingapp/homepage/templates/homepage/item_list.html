@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "homepage/homepage_base.html" %}
 {% load static %}
 {% block body_block %}
 
@@ -10,11 +10,11 @@
         <div class="product box-element">
         <a href="{{item.id}}"><img class="imgrid" src="{{item.image.url}}" alt=""></a>
         <!-- <button type="button" class="addc btn btn-warning">Add to Cart</button> -->
-        <h6><strong>Product</strong></h6>
+        <h6><strong>{{item.name}}</strong></h6>
       		<hr>
 
-      		<button  class="btn btn-outline-success add-btn">Add to Cart</button>
-      		<h4 style="display: inline-block; float: right"><strong>$20</strong>
+      		<button data-product={{item.id}} data-action="add" class="btn btn-outline-success add-btn update-cart">Add to Cart</button>
+      		<h4 style="display: inline-block; float: right"><strong>{{item.price}}</strong>
         </div>
       </div>
 
