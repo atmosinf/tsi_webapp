@@ -18,6 +18,17 @@ class ItemDetailView(DetailView):
     model = models.Item
     template_name = 'homepage/item.html'
 
+def cart(request):
+    # if request.user.is_authenticated:
+    #     customer = request.user.customer
+    #     order, created = Order.objects.get_or_create(customer=customer, complete)
+    # context = {}
+    return render(request, 'homepage/cart.html', context)
+
+def checkout(request):
+    context = {}
+    return render(request, 'homepage/checkout.html', context)
+
 def register(request):
     registered = False
     if request.method == 'POST':
