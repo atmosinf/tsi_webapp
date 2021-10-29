@@ -8,4 +8,6 @@ urlpatterns = [
     re_path(r'^logout/$', views.user_logout, name='logout'),
     re_path(r'^login/$', views.user_login, name='user_login'),
     re_path(r'^(?P<pk>\d+)/$',views.ItemDetailView.as_view(),name='detail'),
+    re_path(r'^cart/$',views.cart,name='cart'),
+    re_path(r'^checkout/$',views.checkout,name='checkout'),
 ]

@@ -6,9 +6,23 @@
     <div class="row">
 
     {% for item in item_list %}
-      <div class="col"><a href="{{item.id}}"><img class="imgrid" src="{{item.image.url}}" alt=""></a></div>
+      <div class="col">
+        <div class="product box-element">
+        <a href="{{item.id}}"><img class="imgrid" src="{{item.image.url}}" alt=""></a>
+        <!-- <button type="button" class="addc btn btn-warning">Add to Cart</button> -->
+        <h6><strong>Product</strong></h6>
+      		<hr>
+
+      		<button  class="btn btn-outline-success add-btn">Add to Cart</button>
+      		<h4 style="display: inline-block; float: right"><strong>$20</strong>
+        </div>
+      </div>
+
     {% endfor %}
     </div>
 
+    <script type="text/javascript" src="{% static 'js/cart.js' %}">
+
+    </script>
 
 {% endblock %}
