@@ -10,4 +10,6 @@ urlpatterns = [
     re_path(r'^(?P<pk>\d+)/$',views.ItemDetailView.as_view(),name='detail'),
     re_path(r'^cart/$',views.cart,name='cart'),
     re_path(r'^checkout/$',views.checkout,name='checkout'),
+    re_path(r'^update_item/$',views.updateItem,name='update_item'),
+    re_path(r'^$', views.index, name='index'),
 ]

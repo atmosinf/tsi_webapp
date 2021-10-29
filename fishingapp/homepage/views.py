@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from homepage.forms import UserForm
+from django.http import JsonResponse
+import json
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -8,9 +10,22 @@ from django.contrib.auth.decorators import login_required
 from homepage import models
 from django.views.generic import View, TemplateView, ListView, DetailView
 
-class IndexView(ListView):
-    context_object_name = 'item_list'
-    model = models.Item
+# class IndexView(ListView):
+#     context_object_name = 'item_list'
+#     model = models.Item
+#
+#     order, created = models.Order.objects.get_or_create()
+#     items = order.orderitem_set.all()
+#     cartitems = order.get_cart_items
+#     extra_context={'cartitems': cartitems}
+
+def index(request):
+    item_list = models.Item.objects.all()
+    order, created = models.Order.objects.get_or_create()
+    items = order.orderitem_set.all()
+    cartitems = order.get_cart_items
+
+    return render(request, 'homepage/item_list.html',{'item_list':item_list,'cartitems':cartitems})
 
 # Create your views here.
 class ItemDetailView(DetailView):
@@ -18,15 +33,51 @@ class ItemDetailView(DetailView):
     model = models.Item
     template_name = 'homepage/item.html'
 
+    order, created = models.Order.objects.get_or_create()
+    items = order.orderitem_set.all()
+    cartitems = order.get_cart_items
+    extra_context={'cartitems': cartitems}
+
+# def itemDetails(request, pk):
+#     item_detail = models.Item.objects.all()
+#     return render(request,'homepage/item.html',{'item_detail':item_detail})
+
+def updateItem(request):
+    data = json.loads(request.body)
+    productid = data['productid']
+    action = data['action']
+
+    print('action',action)
+    print('productid',productid)
+
+    product = models.Item.objects.get(id=productid)
+    order, created = models.Order.objects.get_or_create()
+    orderItem, created = models.OrderItem.objects.get_or_create(order=order, item=product)
+
+    if action == 'add':
+        orderItem.quantity = orderItem.quantity + 1
+    elif action == 'remove':
+        orderItem.quantity = orderItem.quantity - 1
+
+    orderItem.save()
+
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+
+    return JsonResponse('Item was added', safe=False)
+
 def cart(request):
-    # if request.user.is_authenticated:
-    #     customer = request.user.customer
-    #     order, created = Order.objects.get_or_create(customer=customer, complete)
-    # context = {}
+    order, created = models.Order.objects.get_or_create()
+    items = order.orderitem_set.all()
+    cartitems = order.get_cart_items
+    context = {'items':items, 'order':order, 'cartitems':cartitems}
     return render(request, 'homepage/cart.html', context)
 
 def checkout(request):
-    context = {}
+    order, created = models.Order.objects.get_or_create()
+    items = order.orderitem_set.all()
+    cartitems = order.get_cart_items
+    context = {'items':items, 'order':order, 'cartitems':cartitems}
     return render(request, 'homepage/checkout.html', context)
 
 def register(request):
