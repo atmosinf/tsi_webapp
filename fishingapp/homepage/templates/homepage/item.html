@@ -1,7 +1,20 @@
 {% extends "homepage/homepage_base.html" %}
 {% block body_block %}
-  <h1>{{item_detail.name}}</h1>
-  <img src="{{item_detail.image.url}}" alt="">
-  <p>{{item_detail.description}}</p>
-  <p>€{{item_detail.price}}</p>
+  <div class="box-element">
+    <div class="row">
+    <div class="col-lg-6">
+    <img class="itemdetailimage" src="{{item_detail.image.url}}" alt="">
+
+    </div>
+      <div class="col-lg-6 itemdetails">
+
+          <h2>{{item_detail.name}}</h2>
+          <p>{{item_detail.description}}</p>
+          <p id="descprice">€{{item_detail.price}}</p>
+          <button data-product={{item_detail.id}} data-action="add" class="btn btn-outline-success add-btn update-cart">Add to Cart</button>
+      </div>
+    </div>
+    </div>
+
+
 {% endblock %}
