@@ -10,14 +10,9 @@ from django.contrib.auth.decorators import login_required
 from homepage import models
 from django.views.generic import View, TemplateView, ListView, DetailView
 
-# class IndexView(ListView):
-#     context_object_name = 'item_list'
-#     model = models.Item
-#
-#     order, created = models.Order.objects.get_or_create()
-#     items = order.orderitem_set.all()
-#     cartitems = order.get_cart_items
-#     extra_context={'cartitems': cartitems}
+def orderplaced(request):
+    context = {'cartitems':0}
+    return render(request, 'homepage/orderplaced.html', context)
 
 def index(request):
     item_list = models.Item.objects.all()
